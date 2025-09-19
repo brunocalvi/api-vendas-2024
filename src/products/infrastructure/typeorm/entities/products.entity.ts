@@ -16,9 +16,20 @@ export class Product implements ProductModel {
   @Column('int')
   quantity: number;
 
-  @CreateDateColumn('created_at')
+  // Data de criação automática
+  @CreateDateColumn({
+    type: 'timestamp',
+    precision: 6,
+    default: () => 'CURRENT_TIMESTAMP(6)',
+  })
   created_at: Date;
 
-  @UpdateDateColumn('updated_at')
+  // Data de atualização automática
+  @UpdateDateColumn({
+    type: 'timestamp',
+    precision: 6,
+    default: () => 'CURRENT_TIMESTAMP(6)',
+    onUpdate: 'CURRENT_TIMESTAMP(6)',
+  })
   updated_at: Date;
 }
